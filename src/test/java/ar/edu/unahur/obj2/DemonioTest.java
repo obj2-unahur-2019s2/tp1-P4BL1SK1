@@ -4,7 +4,7 @@ import org.testng.annotations.BeforeMethod;
 
 import static org.testng.Assert.*;
 
-public class DiabolicoTest {
+public class DemonioTest {
 
     @BeforeMethod
     public void setUp() {
