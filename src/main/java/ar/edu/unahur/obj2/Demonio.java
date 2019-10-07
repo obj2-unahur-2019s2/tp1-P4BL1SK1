@@ -1,7 +1,7 @@
 package ar.edu.unahur.obj2;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public abstract class Demonio {
     private int nivelDeMaldad;
@@ -12,32 +12,50 @@ public abstract class Demonio {
     }
 
     public void salirACazar(Lugar lugar) {
+        List<Alma> tempSouls = null; //Lista temporal de almas obtenidas en cada caza;
+        final Integer[] tormentedSoulsCounter = null;
+
         lugar.getAlmasQueLoHabitan().forEach(alma -> {
-            if (checkSoul(alma)) {
-                cazarAlma(alma);
+            if (this.puedeCazar(alma)) {
+                tempSouls.add(alma);
+                cazarAlma(alma, lugar);
             }
             else {
                 atormentar(alma);
-                alma.nivelBondad -= 5;
-                anotherCondition(alma);
+                tormentedSoulsCounter[0]++;
             }
         } );
+        nivelDeMaldad += (tormentedSoulsCounter[0]) + (tempSouls.size()*2);
     }
 
-
-    public boolean checkSoul(Alma alma) {
-        return alma.nivelBondad > this.nivelDeMaldad && selfCondition(alma);
-    }
-
-    public void cazarAlma(Alma alma){
+    public void cazarAlma(Alma alma, Lugar lugar){
         this.almasCazadas.add(alma);
+        lugar.almasQueLoHabitan.remove(alma);
     }
+
+    public boolean puedeCazar(Alma alma) {
+        return alma.nivelDeBondad < this.nivelDeMaldad && checkSoulCondition(alma);
+    }
+
 
     public void atormentar(Alma alma) {
-        alma.estaAtormentada = true;
+        alma.serAtormentada(this);
     }
 
-    public abstract boolean selfCondition(Alma alma);
-    protected abstract void anotherCondition(Alma alma);
+
+    public abstract boolean checkSoulCondition(Alma alma);
+    protected abstract void tormentCondition(Alma alma);
+
+    public int getNivelDeMaldad() {
+        return nivelDeMaldad;
+    }
+
+    public List<Alma> getAlmasCazadas() {
+        return almasCazadas;
+    }
+
+    public Integer getCantAlmasCazadas() {
+        return almasCazadas.size();
+    }
 }
 

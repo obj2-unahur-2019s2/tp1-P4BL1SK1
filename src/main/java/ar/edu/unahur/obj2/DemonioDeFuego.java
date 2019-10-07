@@ -7,12 +7,10 @@ public class DemonioDeFuego extends Demonio {
     }
 
     @Override
-    public boolean selfCondition(Alma alma) {
-        return alma.getEsFriolenta() == false;
+    public boolean checkSoulCondition(Alma alma) {
+        return !alma.getEsFriolenta();
     }
 
     @Override
-    protected  void anotherCondition(Alma alma) {
-        alma.esFrioLenta = false;
-    }
+    protected  void tormentCondition(Alma alma) { alma.setEsFriolenta(false); }
 }

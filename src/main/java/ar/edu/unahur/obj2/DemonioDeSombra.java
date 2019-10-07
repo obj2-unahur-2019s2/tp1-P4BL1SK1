@@ -5,12 +5,12 @@ public class DemonioDeSombra extends Demonio {
         super(nivelDeMaldad);
     }
     @Override
-    public boolean selfCondition(Alma alma) {
+    public boolean checkSoulCondition(Alma alma) {
         return alma.valor < 50;
     }
 
     @Override
-    protected  void anotherCondition(Alma alma) {
-    alma.nivelBondad /= 2;
+    protected  void tormentCondition(Alma alma) {
+    alma.nivelDeBondad /= 2;
     }
 }

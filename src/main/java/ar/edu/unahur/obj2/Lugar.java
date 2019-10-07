@@ -1,14 +1,14 @@
 package ar.edu.unahur.obj2;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Lugar {
     String nombre;
-    ArrayList<Alma> almasQueLoHabitan;
+    List<Alma> almasQueLoHabitan = null;
 
-    public Lugar(String nombre, ArrayList<Alma> almasQueLoHabitan) {
+    public Lugar(String nombre) {
         this.nombre = nombre;
-        this.almasQueLoHabitan = almasQueLoHabitan;
     }
 
     public String getNombre() {
@@ -19,11 +19,19 @@ public class Lugar {
         this.nombre = nombre;
     }
 
-    public ArrayList<Alma> getAlmasQueLoHabitan() {
+    public List<Alma> getAlmasQueLoHabitan() {
         return almasQueLoHabitan;
     }
 
-    public void setAlmasQueLoHabitan(ArrayList<Alma> almasQueLoHabitan) {
+    public void setAlmasQueLoHabitan(List<Alma> almasQueLoHabitan) {
         this.almasQueLoHabitan = almasQueLoHabitan;
+    }
+
+    public void recibirAlma(Alma alma) {
+        almasQueLoHabitan.add(alma);
+    }
+
+    public void liberarAlma(Alma alma) {
+        almasQueLoHabitan.remove(alma);
     }
 }
