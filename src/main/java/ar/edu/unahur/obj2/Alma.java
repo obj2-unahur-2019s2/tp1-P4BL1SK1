@@ -22,6 +22,7 @@ public class Alma {
     public boolean getEstaAtormentada() { return estaAtormentada; }
 
     public boolean getEsFriolenta() { return esFriolenta; }
+    public int getNivelDeBondad() {return nivelDeBondad;}
 
     public void serAtormentada(Demonio demonio) {
         if(nivelDeBondad > 5) {
@@ -33,4 +34,7 @@ public class Alma {
         demonio.tormentCondition(this);
         estaAtormentada = true;
     }
+
+
+
 }

@@ -3,7 +3,7 @@ package ar.edu.unahur.obj2;
 public class SupervivenciaExtremaEnElUnfierno extends Tecnica {
 
     public SupervivenciaExtremaEnElUnfierno(Alma alma) {
-        this.alma = alma;
+        super(alma);
     }
 
     @Override

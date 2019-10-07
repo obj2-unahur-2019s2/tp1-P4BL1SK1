@@ -5,10 +5,11 @@ import java.util.List;
 
 public class Lugar {
     String nombre;
-    List<Alma> almasQueLoHabitan = null;
+    List<Alma> almasQueLoHabitan;
 
     public Lugar(String nombre) {
         this.nombre = nombre;
+        almasQueLoHabitan = new ArrayList<>();
     }
 
     public String getNombre() {
@@ -34,4 +35,10 @@ public class Lugar {
     public void liberarAlma(Alma alma) {
         almasQueLoHabitan.remove(alma);
     }
+
+    public void liberarAlmas(List<Alma> alma) {
+        almasQueLoHabitan.removeAll(alma);
+    }
+
+
 }

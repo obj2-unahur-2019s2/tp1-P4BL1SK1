@@ -1,10 +1,15 @@
 package ar.edu.unahur.obj2;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class  Diablo {
-    List<Demonio> demonios = null;
+    List<Demonio> demonios;
+
+    public Diablo() {
+        this.demonios = new ArrayList<>();
+    }
 
     public boolean puedeDemonioCazar(Demonio demonio, Alma alma) {
         return demonio.puedeCazar(alma);
@@ -50,5 +55,15 @@ public class  Diablo {
 
     public List<Alma> totalDeAlmasCazadas() {
         return demonios.stream().flatMap(demon -> demon.getAlmasCazadas().stream()).collect(Collectors.toList());
+    }
+
+    public List<Demonio> getDemonios () {
+        return demonios;
+    }
+    public int getCantEsbirros() {
+        return demonios.size();
+    }
+    public void setDemonios(List<Demonio> demonios) {
+        this.demonios = demonios;
     }
 }

@@ -3,6 +3,10 @@ package ar.edu.unahur.obj2;
 public abstract class Tecnica extends Alma {
     Alma alma;
 
+    public Tecnica(Alma alma) {
+        this.alma = alma;
+    }
+
     @Override
     public void setNivelDeBondad(int nivelDeBondad) {
         super.setNivelDeBondad(nivelDeBondad);

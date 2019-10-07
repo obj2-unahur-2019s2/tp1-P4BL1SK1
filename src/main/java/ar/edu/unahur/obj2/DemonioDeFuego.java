@@ -4,6 +4,7 @@ public class DemonioDeFuego extends Demonio {
 
     public DemonioDeFuego(int nivelDeMaldad) {
         super(nivelDeMaldad);
+
     }
 
     @Override

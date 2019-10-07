@@ -1,53 +1,72 @@
 package ar.edu.unahur.obj2;
 
 import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class DevilTest {
 
     //Devil:
-    Diablo Luci = new Diablo();
+    Diablo luci;
 
     //Demons
-    Demonio d1; Demonio d2;Demonio d3; Demonio d4; Demonio d5;
+    Demonio d1; Demonio d2;Demonio d3;
 
     //Souls
-    Alma almita; Alma alma; Alma almucha;
+    Alma alma; Alma alma1; Alma alma2; Alma redCross; Alma survive; Alma demonMartialArts;
 
     //Places
-    Lugar midgard = new Lugar("Midgard");
+    Lugar midgard;
+    private Object CruzRoja;
 
-
-    @BeforeEach
+    @BeforeTest
     public void setup() {
+
         //Demons:
         d1 = new DemonioDeHielo(5);
         d2 = new DemonioDeFuego(5);
         d3 = new DemonioDeSombra(5);
-        d4 = new DemonioDeSombra(3);
 
         //Souls:
-        almita = new Alma(); almita.setNivelDeBondad(4);almita.setEsFriolenta(true);
-        alma = new Alma(); alma.setNivelDeBondad(4);alma.setEsFriolenta(false);
-        almucha = new Alma(); almucha.setNivelDeBondad(4);almucha.setValor(25);
+        alma = new Alma(); alma.setNivelDeBondad(4);alma.setEsFriolenta(true);alma.setValor(25);
+        alma1 = new Alma(); alma1.setNivelDeBondad(4);alma1.setEsFriolenta(true);alma1.setValor(25);
+        alma2 = new Alma(); alma1.setNivelDeBondad(4);alma2.setEsFriolenta(true);alma2.setValor(25);
+        redCross = new CruzRoja(alma);
+        survive = new SupervivenciaExtremaEnElUnfierno(alma1);
+        demonMartialArts = new LuchaMarcialDemoniaca(alma2);
 
-        //Place
-        midgard.recibirAlma(alma);
-        midgard.recibirAlma(almita);
-        midgard.recibirAlma(almucha);
+        //Devil
+        luci = new Diablo();
+        luci.setDemonios(Stream.of(d1,d2,d3).collect(Collectors.toList()));
     }
 
     @Test
-    public void puedeCazar () {
-        Assert.assertEquals(d1.puedeCazar(almita),true);
-        Assert.assertEquals(d2.puedeCazar(alma),false);
+    public void reclutarDemonios() {
+        Assert.assertEquals(luci.getCantEsbirros(),3);
 
-        Assert.assertEquals(d1.puedeCazar(alma),false);
-        Assert.assertEquals(d2.puedeCazar(almita),true);
+        luci.atormentar(d1, alma);
+        Assert.assertTrue(alma.getEsFriolenta());
 
+        luci.atormentar(d2, alma1);
+        Assert.assertFalse(alma1.getEsFriolenta());
+    }
+
+    @Test
+    public void almasEntrenadas() {
+        redCross.setNivelDeBondad(20);
+        Assert.assertEquals(redCross.getNivelDeBondad(),100);
+        redCross.setNivelDeBondad(899);
+        Assert.assertEquals(redCross.getNivelDeBondad(),899);
+
+        Assert.assertFalse(survive.getEsFriolenta());
+        int valorEsperado = demonMartialArts.getValor();
+        Assert.assertEquals(valorEsperado,50);
     }
 }

@@ -9,32 +9,33 @@ public abstract class Demonio {
 
     public Demonio(int nivelDeMaldad) {
         this.nivelDeMaldad = nivelDeMaldad;
+        this.almasCazadas = new ArrayList<>();
     }
 
     public void salirACazar(Lugar lugar) {
-        List<Alma> tempSouls = null; //Lista temporal de almas obtenidas en cada caza;
-        final Integer[] tormentedSoulsCounter = null;
+        List<Alma> tempSouls = new ArrayList<>(); //Lista temporal de almas obtenidas en cada caza;
 
         lugar.getAlmasQueLoHabitan().forEach(alma -> {
-            if (this.puedeCazar(alma)) {
+            if (puedeCazar(alma)) {
                 tempSouls.add(alma);
-                cazarAlma(alma, lugar);
+                nivelDeMaldad += 2;
             }
             else {
                 atormentar(alma);
-                tormentedSoulsCounter[0]++;
+                nivelDeMaldad++;
             }
-        } );
-        nivelDeMaldad += (tormentedSoulsCounter[0]) + (tempSouls.size()*2);
+        });
+        cazarAlmas(tempSouls);
+        lugar.liberarAlmas(tempSouls);
     }
 
-    public void cazarAlma(Alma alma, Lugar lugar){
-        this.almasCazadas.add(alma);
-        lugar.almasQueLoHabitan.remove(alma);
+    public void cazarAlmas(List<Alma> alma){
+        this.almasCazadas.addAll(alma);
     }
+
 
     public boolean puedeCazar(Alma alma) {
-        return alma.nivelDeBondad < this.nivelDeMaldad && checkSoulCondition(alma);
+        return this.getNivelDeMaldad() > alma.getNivelDeBondad() && this.checkSoulCondition(alma);
     }
 
 
