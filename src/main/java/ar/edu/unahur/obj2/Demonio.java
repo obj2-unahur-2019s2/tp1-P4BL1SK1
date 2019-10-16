@@ -3,7 +3,7 @@ package ar.edu.unahur.obj2;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public abstract class Demonio {
+public abstract class Demonio{
     private int nivelDeMaldad;
     private List<Alma> almasCazadas;
 
@@ -35,7 +35,7 @@ public abstract class Demonio {
 
 
     public boolean puedeCazar(Alma alma) {
-        return this.getNivelDeMaldad() > alma.getNivelDeBondad() && this.checkSoulCondition(alma);
+        return this.getNivelDeMaldad() > alma.getNivelDeBondad() && this.checkSoulCondition(alma) && !(alma.tipoDeProteccion.estaProtegido(nivelDeMaldad,this.getCantAlmasCazadas()));
     }
 
 
@@ -43,9 +43,8 @@ public abstract class Demonio {
         alma.serAtormentada(this);
     }
 
-
     public abstract boolean checkSoulCondition(Alma alma);
-    protected abstract void tormentCondition(Alma alma);
+    public abstract void tormentCondition(Alma alma);
 
     public int getNivelDeMaldad() {
         return nivelDeMaldad;

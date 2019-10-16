@@ -1,12 +1,17 @@
 package ar.edu.unahur.obj2;
 
+import ar.edu.unahur.obj2.diabolico.alma.proteccion.Proteccion;
+
 import java.util.ArrayList;
 
 public class Alma {
+    Proteccion tipoDeProteccion;
+
     int nivelDeBondad;
     int valor;
     boolean esFriolenta;
     boolean estaAtormentada;
+    boolean estaProtegida = false;
     ArrayList<Tecnica> tecnicasAprendidas;
 
     public void setNivelDeBondad(int nivelBondad) { this.nivelDeBondad = nivelBondad; }
@@ -35,6 +40,10 @@ public class Alma {
         estaAtormentada = true;
     }
 
-
-
+    public void setTipoDeProteccion(Proteccion tipoDeProteccion) {
+        this.tipoDeProteccion = tipoDeProteccion;
+    }
+    public Proteccion getTipoDeProteccion() {
+        return tipoDeProteccion;
+    }
 }

@@ -1,7 +1,9 @@
 package ar.edu.unahur.obj2;
 
+import ar.edu.unahur.obj2.diabolico.alma.proteccion.AnilloDePoder;
+import ar.edu.unahur.obj2.diabolico.alma.proteccion.LuzBlanca;
 import org.testng.Assert;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -15,11 +17,15 @@ public class SoulTest {
     //Souls
     Alma almita; Alma alma; Alma almucha; Alma almucha2;
 
+    //ProtectionTypes
+    AnilloDePoder ring = new AnilloDePoder();
+    LuzBlanca whiteLight = new LuzBlanca();
+
     //Places
     Lugar midgard;
 
 
-    @BeforeTest
+    @BeforeMethod
     public void setup() {
 
         //Demons:
@@ -29,9 +35,16 @@ public class SoulTest {
 
         //Souls:
         almita = new Alma(); almita.setNivelDeBondad(4);almita.setEsFriolenta(true);almita.setValor(25);
+        almita.setTipoDeProteccion(whiteLight);
+
         alma = new Alma(); alma.setNivelDeBondad(4);alma.setEsFriolenta(false);alma.setValor(25);
+        alma.setTipoDeProteccion(whiteLight);
+
         almucha = new Alma(); almucha.setNivelDeBondad(4);almucha.setValor(25);
+        almucha.setTipoDeProteccion(whiteLight);
+
         almucha2 = new Alma(); almucha2.setNivelDeBondad(4);almucha2.setValor(54);
+        almucha2.setTipoDeProteccion(ring);
 
         //Place
         midgard = new Lugar("Midgard");
