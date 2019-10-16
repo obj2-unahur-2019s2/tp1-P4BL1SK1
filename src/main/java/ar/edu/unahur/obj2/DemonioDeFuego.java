@@ -13,5 +13,5 @@ public class DemonioDeFuego extends Demonio {
     }
 
     @Override
-    protected  void tormentCondition(Alma alma) { alma.setEsFriolenta(false); }
+    public void tormentCondition(Alma alma) { alma.setEsFriolenta(false); }
 }
